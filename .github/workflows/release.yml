@@ -1,0 +1,176 @@
+name: docker-release
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*.*.*'
+
+env:
+  IMAGE_NAME: python
+
+jobs:
+  python-35:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    env:
+      PYTHON_VERSION: 3.5
+      PYTHON_FULL_VERSION: 3.5.9
+      PYTHON_SHA256SUM: 67a1d4fc6e4540d6a092cadc488e533afa961b3c9becc74dc3d6b55cb56e0cc1
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Build & push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION="$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')"
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION="$(echo ${VERSION} | sed -e 's/^v//')"
+
+          # Use php versions as latest tag
+          if [ "$VERSION" == "master" ]; then
+            VERSION=""
+          else
+            VERSION="-${VERSION}"
+          fi
+
+          docker build . \
+                      --file Dockerfile \
+                      --build-arg PYTHON_VERSION=${PYTHON_VERSION} \
+                      --build-arg PYTHON_FULL_VERSION=${PYTHON_FULL_VERSION} \
+                      --build-arg PYTHON_SHA256SUM=${PYTHON_SHA256SUM} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION}
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+  python-36:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    env:
+      PYTHON_VERSION: 3.6
+      PYTHON_FULL_VERSION: 3.6.10
+      PYTHON_SHA256SUM: 7034dd7cba98d4f94c74f9edd7345bac71c8814c41672c64d9044fa2f96f334d
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Build & push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION="$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')"
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION="$(echo ${VERSION} | sed -e 's/^v//')"
+
+          # Use php versions as latest tag
+          if [ "$VERSION" == "master" ]; then
+            VERSION=""
+          else
+            VERSION="-${VERSION}"
+          fi
+
+          docker build . \
+                      --file Dockerfile \
+                      --build-arg PYTHON_VERSION=${PYTHON_VERSION} \
+                      --build-arg PYTHON_FULL_VERSION=${PYTHON_FULL_VERSION} \
+                      --build-arg PYTHON_SHA256SUM=${PYTHON_SHA256SUM} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION}
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+  python-37:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    env:
+      PYTHON_VERSION: 3.7
+      PYTHON_FULL_VERSION: 3.7.7
+      PYTHON_SHA256SUM: 8c8be91cd2648a1a0c251f04ea0bb4c2a5570feb9c45eaaa2241c785585b475a
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Build & push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION="$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')"
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION="$(echo ${VERSION} | sed -e 's/^v//')"
+
+          # Use php versions as latest tag
+          if [ "$VERSION" == "master" ]; then
+            VERSION=""
+          else
+            VERSION="-${VERSION}"
+          fi
+
+          docker build . \
+                      --file Dockerfile \
+                      --build-arg PYTHON_VERSION=${PYTHON_VERSION} \
+                      --build-arg PYTHON_FULL_VERSION=${PYTHON_FULL_VERSION} \
+                      --build-arg PYTHON_SHA256SUM=${PYTHON_SHA256SUM} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION}
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+  python-38:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    env:
+      PYTHON_VERSION: 3.8
+      PYTHON_FULL_VERSION: 3.8.3
+      PYTHON_SHA256SUM: 6af6d4d2e010f9655518d0fc6738c7ff7069f10a4d2fbd55509e467f092a8b90
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Build & push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION="$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')"
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION="$(echo ${VERSION} | sed -e 's/^v//')"
+
+          # Use php versions as latest tag
+          if [ "$VERSION" == "master" ]; then
+            VERSION=""
+          else
+            VERSION="-${VERSION}"
+          fi
+
+          docker build . \
+                      --file Dockerfile \
+                      --build-arg PYTHON_VERSION=${PYTHON_VERSION} \
+                      --build-arg PYTHON_FULL_VERSION=${PYTHON_FULL_VERSION} \
+                      --build-arg PYTHON_SHA256SUM=${PYTHON_SHA256SUM} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION} \
+                      --tag docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
+
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_VERSION}${VERSION}
+          docker push docker.pkg.github.com/${{ github.repository }}/${IMAGE_NAME}:${PYTHON_FULL_VERSION}${VERSION}
