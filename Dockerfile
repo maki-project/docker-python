@@ -24,8 +24,7 @@ ENV PYTHON_RUNTIME_DEPENDENCIES="\
     gcc \
     libpq-devel \
     libxml2-devel \
-    libxslt-devel \
-    libzstd-devel"
+    libxslt-devel"
 
 RUN \
     echo " ---> Update system packages" && \
