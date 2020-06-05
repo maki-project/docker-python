@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/project-maki/docker-core/core:1.0.1
+FROM docker.pkg.github.com/maki-project/docker-core/core:1.0.2
 
 
 ARG PYTHON_VERSION
